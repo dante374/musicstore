@@ -1,0 +1,96 @@
+.footer {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    padding: 32px 24px 24px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.footer-suscripcion {
+    margin-bottom: 24px;
+}
+
+.footer-suscripcion-titulo {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.footer-suscripcion-form {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.footer-input {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    outline: none;
+    width: 260px;
+    transition: var(--transition);
+}
+
+.footer-input:focus {
+    border-color: var(--accent);
+}
+
+.footer-input::placeholder {
+    color: var(--text-muted);
+}
+
+.footer-btn-suscribir {
+    background-color: var(--accent);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.footer-btn-suscribir:hover {
+    background-color: var(--accent-hover);
+}
+
+.footer-btn-suscribir:disabled {
+    opacity: 0.5;
+}
+
+.footer-error {
+    display: block;
+    color: #ff3b30;
+    font-size: 0.78rem;
+    margin-top: 8px;
+}
+
+.footer-exito {
+    display: block;
+    color: #34c759;
+    font-size: 0.78rem;
+    margin-top: 8px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  list-style: none;
+  margin: 0 0 12px 0;
+  padding: 0;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}

@@ -1,0 +1,147 @@
+.encuesta-container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.encuesta-header {
+  margin-bottom: 32px;
+}
+
+.encuesta-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.encuesta-header p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.encuesta-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.encuesta-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.encuesta-campo label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.encuesta-campo p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: -4px;
+}
+
+.encuesta-opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.encuesta-opcion {
+  background-color: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.encuesta-opcion:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.encuesta-opcion.seleccionado {
+  background-color: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.encuesta-select {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: var(--transition);
+}
+
+.encuesta-select:focus {
+  border-color: var(--accent);
+}
+
+.btn-encuesta {
+  width: 100%;
+  background-color: var(--accent);
+  color: white;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: var(--transition);
+  margin-top: 8px;
+}
+
+.btn-encuesta:hover {
+  background-color: var(--accent-hover);
+}
+
+.btn-encuesta:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.encuesta-resultado {
+  margin-top: 32px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  padding: 24px;
+}
+
+.encuesta-resultado h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.encuesta-resultado p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.encuesta-error {
+  background-color: rgba(255, 59, 48, 0.1);
+  border: 1px solid rgba(255, 59, 48, 0.3);
+  color: #ff3b30;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+.encuesta-cargando {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 24px 0;
+}

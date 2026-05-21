@@ -1,0 +1,24 @@
+CREATE TABLE usuarios (
+  id SERIAL PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  email VARCHAR(150) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  rol VARCHAR(20) DEFAULT 'cliente',
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE contactos (
+  id SERIAL PRIMARY KEY,
+  nombre VARCHAR(100),
+  email VARCHAR(150),
+  asunto VARCHAR(200),
+  mensaje TEXT,
+  leido BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE suscriptores (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(150) UNIQUE NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);
