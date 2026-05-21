@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import '../styles/Chatbot.css'
+import '../styles/chatbot.css'
 const mensajeInicial = {
     role: 'assistant',
     content: '¡Hola! Soy el asistente de MusicStore 🎸 ¿En que puedo ayudarte?'
