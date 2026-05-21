@@ -9,7 +9,9 @@ const suscripcionRoutes = require('./routes/suscripcion');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://musicstore-1wrj.vercel.app/'
+}));
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api', chatRoutes);
