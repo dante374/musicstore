@@ -10,7 +10,10 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors({
-    origin: '/\.vercel\.app$/'
+    oorigin: [
+        'https://musicstore-1wrj.vercel.app',
+        'https://musicstore-bf3t.vercel.app'
+    ]
 }));
 app.use(express.json());
 app.use('/api/auth', authRoutes);
