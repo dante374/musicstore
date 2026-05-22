@@ -45,7 +45,7 @@ function Encuesta(){
 
     Basándote en el catálogo de MusicStore, recomendá el instrumento más adecuado para este usuario. Explicá brevemente por qué es la mejor opción para su nivel y estilo musical. Si hay más de una opción que encaje, mencioná las alternativas.`
     try{
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/chat`,{
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/chat`,{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({mensaje: prompt, historial: []})
