@@ -14,60 +14,50 @@ function Registro(){
     const { login } = useAuth()
     const navigate = useNavigate()
 
-    const validar = () =>{
+    const validar = () => {
         const nuevosErrores = {}
-        if(!nombre){
-            nuevosErrores.nombre = 'El nombre es requerido'
-        }
-        if(!email){
-            nuevosErrores.email = 'El email es requerido'
-        }else if(!/\S+@\S+\.\S+/.test(email)){
-            nuevosErrores.email ='El email no es valido'
-        }
-        if(!password){
-            nuevosErrores.password = 'La contraseña es requerida'
-        }else if(password.length<6){
-            nuevosErrores.password = 'Minimo 6 caracteres'
-        }
-        if(!confirmar){
-            nuevosErrores.confirmar = 'Confirma tu contraseña'
-        }else if(password != confirmar){
-            nuevosErrores.confirmar = 'Las contraseñas no son iguales'
-        }
+        if(!nombre) nuevosErrores.nombre = 'El nombre es requerido'
+        if(!email) nuevosErrores.email = 'El email es requerido'
+        else if(!/\S+@\S+\.\S+/.test(email)) nuevosErrores.email = 'El email no es válido'
+        if(!password) nuevosErrores.password = 'La contraseña es requerida'
+        else if(password.length < 6) nuevosErrores.password = 'Mínimo 6 caracteres'
+        if(!confirmar) nuevosErrores.confirmar = 'Confirmá tu contraseña'
+        else if(password !== confirmar) nuevosErrores.confirmar = 'Las contraseñas no son iguales'
         setErrores(nuevosErrores)
         return Object.keys(nuevosErrores).length === 0
     }
-    const handleSubmit = async () =>{
+
+    const handleSubmit = () => {
         setErrorServidor('')
-        if(!validar()){
-            return
-        }
+        if(!validar()) return
         setCargando(true)
 
-        try{
-            console.log({ nombre, email, password })
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/registro`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ nombre, email, password})
-            })
-            const data = await response.json()
-            if(!response.ok){
-                setErrorServidor(data.error)
+        try {
+            // Verificar si el email ya está registrado
+            const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]')
+            const existe = usuarios.find(u => u.email === email)
+            if(existe){
+                setErrorServidor('El email ya está registrado')
                 return
             }
-            login(data)
+
+            // Guardar usuario
+            const nuevoUsuario = { id: Date.now(), nombre, email, password }
+            usuarios.push(nuevoUsuario)
+            localStorage.setItem('usuarios', JSON.stringify(usuarios))
+
+            // Loguear automáticamente
+            login({ usuario: { id: nuevoUsuario.id, nombre, email } })
             navigate('/')
-        }catch(err){
-            setErrorServidor('Error al conectar con el servidor')
-        }finally{
+        } catch(err) {
+            setErrorServidor('Error al registrar usuario')
+        } finally {
             setCargando(false)
         }
     }
-    const handleKeyDown = (e) =>{
-            if(e.key === 'Enter'){ 
-                handleSubmit()
-            }
+
+    const handleKeyDown = (e) => {
+        if(e.key === 'Enter') handleSubmit()
     }
 
     return (
@@ -128,7 +118,7 @@ function Registro(){
                     </div>
 
                     <button
-                        className="btn-auth"
+                        className="btn waves-effect waves-light btn-auth"
                         onClick={handleSubmit}
                         disabled={cargando}
                     >
@@ -142,7 +132,6 @@ function Registro(){
             </div>
         </div>
     )
-
 }
 
 export default Registro

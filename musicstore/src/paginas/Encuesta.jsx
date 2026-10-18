@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { productos } from '../data/productos'
 import '../styles/Encuesta.css'
 
 const niveles = ['Principiante', 'Intermedio', 'Avanzado']
@@ -6,11 +7,11 @@ const tipos = ['Guitarras', 'Bajos', 'Teclados', 'Baterías', 'Micrófonos', 'Si
 const generos = ['Rock', 'Jazz', 'Clásico', 'Pop', 'Metal', 'Folklore', 'Sin preferencia']
 const marcas = ['Fender', 'Gibson', 'Yamaha', 'Roland', 'Pearl', 'Shure', 'Sin preferencia']
 const presupuestos = [
-    'Hasta $100.000',
-    'Hasta $300.000',
-    'Hasta $500.000',
-    'Hasta $800.000',
-    'Sin límite'
+    { label: 'Hasta $100.000', valor: 100000 },
+    { label: 'Hasta $300.000', valor: 300000 },
+    { label: 'Hasta $500.000', valor: 500000 },
+    { label: 'Hasta $800.000', valor: 800000 },
+    { label: 'Sin límite', valor: Infinity }
 ]
 
 function Encuesta(){
@@ -18,55 +19,64 @@ function Encuesta(){
     const [tipo, setTipo] = useState('')
     const [genero, setGenero] = useState('')
     const [marca, setMarca] = useState('')
-    const [presupuesto, setPresupuesto] = useState('')
-    const [resultado, setResultado] = useState('')
+    const [presupuesto, setPresupuesto] = useState(null)
+    const [presupuestoLabel, setPresupuestoLabel] = useState('')
+    const [resultado, setResultado] = useState([])
     const [cargando, setCargando] = useState(false)
     const [error, setError] = useState('')
 
-    const validar = () =>{
+    const validar = () => {
         if(!nivel || !tipo || !genero || !marca || !presupuesto){
             setError('Todos los campos deben estar completados')
             return false
         }
         return true
     }
-    const handleSubmit = async () =>{
+
+    const handleSubmit = () => {
         setError('')
-        setResultado('')
+        setResultado([])
         if(!validar()) return
         setCargando(true)
-    
-    const prompt = `Un usuario completó una encuesta con las siguientes preferencias:
-    - Nivel musical: ${nivel}
-    - Tipo de instrumento: ${tipo}
-    - Género musical que toca: ${genero}
-    - Marca preferida: ${marca}
-    - Presupuesto: ${presupuesto}
 
-    Basándote en el catálogo de MusicStore, recomendá el instrumento más adecuado para este usuario. Explicá brevemente por qué es la mejor opción para su nivel y estilo musical. Si hay más de una opción que encaje, mencioná las alternativas.`
-    try{
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/chat`,{
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({mensaje: prompt, historial: []})
-        })
+        setTimeout(() => {
+            let filtrados = productos.filter(p => p.precio <= presupuesto)
 
-        const data  = await response.json()
-        if(!response.ok){
-            setError('Error al obtener su recomendacion')
-        }
-        setResultado(data.respuesta)
-    }catch(err){
-        setError('Error al conectarse con el servidor')
-    }finally{
-        setCargando(false)
+            if(tipo !== 'Sin preferencia'){
+                filtrados = filtrados.filter(p => p.categoria === tipo)
+            }
+            if(marca !== 'Sin preferencia'){
+                const porMarca = filtrados.filter(p => p.marca === marca)
+                filtrados = porMarca.length > 0 ? porMarca : filtrados
+            }
+
+            setResultado(filtrados.slice(0, 3))
+            setCargando(false)
+        }, 800)
     }
-  }
-    const Opciones = ({ opciones, valor, onChange}) => (
+
+    const Opciones = ({ opciones, valor, onChange, esPresupuesto }) => (
         <div className="encuesta-opciones">
-           { opciones.map(op =>(
-             <button key={op} className={`encuesta-opcion ${valor === op ? 'seleccionado' : ''}`} onClick={() => onChange(op)}>{op}</button>
-            ))}
+            {opciones.map(op => {
+                const label = esPresupuesto ? op.label : op
+                const val = esPresupuesto ? op.valor : op
+                return (
+                    <button
+                        key={label}
+                        className={`encuesta-opcion ${(esPresupuesto ? presupuestoLabel : valor) === label ? 'seleccionado' : ''}`}
+                        onClick={() => {
+                            if(esPresupuesto){
+                                setPresupuesto(val)
+                                setPresupuestoLabel(label)
+                            } else {
+                                onChange(label)
+                            }
+                        }}
+                    >
+                        {label}
+                    </button>
+                )
+            })}
         </div>
     )
 
@@ -100,13 +110,13 @@ function Encuesta(){
 
                 <div className="encuesta-campo">
                     <label>¿Cuál es tu presupuesto?</label>
-                    <Opciones opciones={presupuestos} valor={presupuesto} onChange={setPresupuesto} />
+                    <Opciones opciones={presupuestos} valor={presupuestoLabel} onChange={() => {}} esPresupuesto={true} />
                 </div>
 
                 {error && <div className="encuesta-error">{error}</div>}
 
                 <button
-                    className="btn-encuesta"
+                    className="btn waves-effect waves-light btn-encuesta"
                     onClick={handleSubmit}
                     disabled={cargando}
                 >
@@ -116,14 +126,32 @@ function Encuesta(){
 
             {cargando && (
                 <div className="encuesta-cargando">
-                    Consultando al asistente...
+                    Buscando productos...
                 </div>
             )}
 
-            {resultado && (
+            {resultado.length > 0 && (
                 <div className="encuesta-resultado">
                     <h2>Nuestra recomendación para vos</h2>
-                    <p>{resultado}</p>
+                    <div className="row">
+                        {resultado.map(p => (
+                            <div className="col s12 m4" key={p.id}>
+                                <div className="card">
+                                    <div className="card-image">
+                                        <img src={p.imagen_url} alt={p.nombre} />
+                                    </div>
+                                    <div className="card-content">
+                                        <span className="card-title">{p.nombre}</span>
+                                        <p>{p.marca} — {p.categoria}</p>
+                                        <p><strong>${p.precio.toLocaleString('es-AR')}</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    {resultado.length === 0 && (
+                        <p>No encontramos productos que coincidan con tus preferencias.</p>
+                    )}
                 </div>
             )}
         </div>

@@ -68,6 +68,13 @@
   font-weight: 500;
   transition: var(--transition);
 }
+.btn-agregar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: normal !important;
+}
 
 .btn-agregar:hover {
   background-color: var(--accent-hover);

@@ -11,52 +11,31 @@ function Contacto(){
     const [cargando, setCargando] = useState(false)
     const [errorServidor, setErrorServidor] = useState('')
 
-    const validar = () =>{
+    const validar = () => {
         const nuevosErrores = {}
-        if(!nombre){
-            nuevosErrores.nombre = 'El nombre es requerido'
-        }
-        if(!email){
-            nuevosErrores.email = 'El email es requerido'
-        }else if(!/\S+@\S+\.\S+/.test(email)){
-            nuevosErrores.email = 'El email no es valido'
-        }if(!asunto){
-            nuevosErrores.asunto = 'El asunto es requerido'
-        }if(!mensaje){
-            nuevosErrores.mensaje = 'El mensaje es requerido'
-        }
+        if(!nombre) nuevosErrores.nombre = 'El nombre es requerido'
+        if(!email) nuevosErrores.email = 'El email es requerido'
+        else if(!/\S+@\S+\.\S+/.test(email)) nuevosErrores.email = 'El email no es válido'
+        if(!asunto) nuevosErrores.asunto = 'El asunto es requerido'
+        if(!mensaje) nuevosErrores.mensaje = 'El mensaje es requerido'
         setErrores(nuevosErrores)
         return Object.keys(nuevosErrores).length === 0
     }
-    const handleSubmit = async () =>{
+
+    const handleSubmit = () => {
         setErrorServidor('')
         setExito(false)
-        if(!validar()){
-            setCargando(true)
-        }
-        try{
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({nombre, email, asunto, mensaje})
-            })
+        if(!validar()) return
+        setCargando(true)
 
-            const data = await response.json()
-
-            if(!response.ok){
-                setErrorServidor(data.error)
-                return
-            }
+        setTimeout(() => {
             setExito(true)
             setNombre('')
             setEmail('')
             setAsunto('')
             setMensaje('')
-        }catch(err){
-            setErrorServidor('Error al conectar con servidor')
-        }finally{
             setCargando(false)
-        }
+        }, 800)
     }
 
     return (
@@ -119,7 +98,7 @@ function Contacto(){
                     </div>
 
                     <button
-                        className="btn-auth"
+                        className="btn waves-effect waves-light btn-auth"
                         onClick={handleSubmit}
                         disabled={cargando}
                     >

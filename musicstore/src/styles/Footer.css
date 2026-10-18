@@ -21,46 +21,48 @@
 .footer-suscripcion-form {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 8px;
     flex-wrap: wrap;
 }
 
 .footer-input {
-    background-color: var(--bg-card);
-    color: var(--text-primary);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 8px 14px;
-    font-size: 0.85rem;
-    outline: none;
-    width: 260px;
-    transition: var(--transition);
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 8px !important;
+    padding: 8px 14px !important;
+    font-size: 0.85rem !important;
+    outline: none !important;
+    width: 260px !important;
+    height: 38px !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
 }
 
 .footer-input:focus {
-    border-color: var(--accent);
+    border-color: var(--accent) !important;
+    box-shadow: none !important;
 }
 
 .footer-input::placeholder {
-    color: var(--text-muted);
+    color: var(--text-muted) !important;
 }
 
 .footer-btn-suscribir {
-    background-color: var(--accent);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    transition: var(--transition);
+    background-color: var(--accent) !important;
+    color: white !important;
+    padding: 0 16px !important;
+    border-radius: 8px !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    height: 38px !important;
+    line-height: 38px !important;
+    transition: var(--transition) !important;
 }
 
 .footer-btn-suscribir:hover {
-    background-color: var(--accent-hover);
-}
-
-.footer-btn-suscribir:disabled {
-    opacity: 0.5;
+    background-color: var(--accent-hover) !important;
 }
 
 .footer-error {
@@ -78,19 +80,17 @@
 }
 
 .footer-links {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  list-style: none;
-  margin: 0 0 12px 0;
-  padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin: 0 0 12px 0;
 }
 
 .footer-links a {
-  color: var(--text-muted);
-  transition: var(--transition);
+    color: var(--text-muted);
+    transition: var(--transition);
 }
 
 .footer-links a:hover {
-  color: var(--text-primary);
+    color: var(--text-primary);
 }
