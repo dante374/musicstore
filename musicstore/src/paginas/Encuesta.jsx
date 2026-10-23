@@ -72,6 +72,7 @@ function Encuesta(){
                                 onChange(label)
                             }
                         }}
+                        
                     >
                         {label}
                     </button>

@@ -93,6 +93,7 @@ function Contacto(){
                             value={mensaje}
                             onChange={e => setMensaje(e.target.value)}
                             rows={5}
+                            class="Mensaje"
                         />
                         {errores.mensaje && <span className="auth-error-campo">{errores.mensaje}</span>}
                     </div>

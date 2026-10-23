@@ -8,6 +8,7 @@ import Login from './paginas/Login'
 import Registro from './paginas/Registro'
 import Contacto from './paginas/Contacto'
 import Encuesta from './paginas/Encuesta'
+import Checkout from './paginas/Checkout'
 
 function App(){
   return(
@@ -18,6 +19,7 @@ function App(){
       <Route path="/" element={<Home/>} />
       <Route path="/catalogo" element={<Catalogo/>}/>
       <Route path='/producto/:id' element={<Producto/>}/>
+      <Route path='/checkout' element={<Checkout/>}/>
       <Route path='/login' element={<Login/>} />
       <Route path='/registro' element={<Registro/>}/>
       <Route path='/contacto' element={<Contacto/>}/>

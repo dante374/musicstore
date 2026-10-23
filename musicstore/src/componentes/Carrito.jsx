@@ -1,8 +1,10 @@
 import { useCarrito } from "../context/CarritoContext";
+import { useNavigate } from 'react-router-dom'
 import '../styles/Carrito.css'
 
 function Carrito({ onCerrar }){
     const { items, quitarProducto, cambiarCantidad, vaciarCarrito, totalPrecio } = useCarrito();
+    const navigate = useNavigate()
     return(
         <>
           <div className="carrito-overlay" onClick={onCerrar}/>
@@ -46,7 +48,7 @@ function Carrito({ onCerrar }){
                                 <span>Total</span>
                                 <strong>${totalPrecio.toLocaleString('es-AR')}</strong>
                             </div>
-                            <button className="btn waves-effect waves-light btn-checkout">Finalizar Compra</button>
+                            <button className="btn waves-effect waves-light btn-checkout" onClick={() => { onCerrar(); navigate('/checkout') }}>Finalizar Compra</button>
                             <button className="btn-flat btn-vaciar" onClick={vaciarCarrito}>
                                 Vaciar Carrito
                             </button>

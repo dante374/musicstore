@@ -14,7 +14,7 @@ export const productos = [
     precio: 620000,
     categoria: "Guitarras",
     marca: "Gibson",
-    imagen_url: "https://guitar.com/wp-content/uploads/2018/10/Gibson-les-paul-modern-hero@1400x1050.jpg",
+    imagen_url: "https://tse3.mm.bing.net/th/id/OIP.K21TLIPtZxQu4aEgK5yIiQHaE8?r=0&pid=Api&h=220&P=0",
     descripcion: "La Les Paul es sinónimo de rock clásico. Con pastillas humbucker y cuerpo de caoba, produce un sonido cálido y potente con mucho sustain. Usada por leyendas como Jimmy Page y Slash."
   },
   {
@@ -68,7 +68,7 @@ export const productos = [
     precio: 120000,
     categoria: "Guitarras",
     marca: "Yamaha",
-    imagen_url: "https://guitarrasacusticaselectricas.com/wp-content/uploads/2024/08/Yamaha-F310-Guitarra-Acustica-Guitarra-Folk-4-4-de-madera-bodegon-Guitarrasacustricaselectricas.com_-819x1024.jpg",
+    imagen_url: "https://m.media-amazon.com/images/S/aplus-media/vc/f407295a-cb7a-49c6-82fc-0fbd8b660961._CR0,0,2000,2000_PT0_SX300__.jpg",
     descripcion: "La Yamaha F310 es la guitarra acústica ideal para principiantes. Con tapa de abeto y aros de meranti, produce un sonido brillante y equilibrado. Fácil de tocar y muy accesible."
   },
   {
