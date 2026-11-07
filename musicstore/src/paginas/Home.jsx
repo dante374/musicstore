@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { productos } from '../data/productos'
 import '../styles/Home.css'
 import M from 'materialize-css'
+import Faq from '../componentes/Faq'
 
 function Home(){
     useEffect(() => {
@@ -43,6 +44,7 @@ function Home(){
                     ))}
                 </div>
             </section>
+            <Faq />
         </>
     )
 }

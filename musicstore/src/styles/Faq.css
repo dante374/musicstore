@@ -1,0 +1,31 @@
+.faq {
+  max-width: 800px;
+  margin: 48px auto;
+  padding: 0 16px;
+}
+
+.faq h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.faq .collapsible {
+  border: 1px solid var(--border);
+  box-shadow: none;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.faq .collapsible-header {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+}
+
+.faq .collapsible-body {
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+}
