@@ -80,3 +80,16 @@
   font-size: 1rem;
   margin-top: 8px;
 }
+.catalogo-container .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.catalogo-container .row .col {
+  float: none;
+  display: flex;
+}
+
+.catalogo-container .row .col > * {
+  width: 100%;
+}
