@@ -22,6 +22,7 @@ function Encuesta(){
     const [presupuesto, setPresupuesto] = useState(null)
     const [presupuestoLabel, setPresupuestoLabel] = useState('')
     const [resultado, setResultado] = useState([])
+    const [buscado, setBuscado] = useState(false)
     const [cargando, setCargando] = useState(false)
     const [error, setError] = useState('')
 
@@ -36,6 +37,7 @@ function Encuesta(){
     const handleSubmit = () => {
         setError('')
         setResultado([])
+        setBuscado(false)
         if(!validar()) return
         setCargando(true)
 
@@ -51,6 +53,7 @@ function Encuesta(){
             }
 
             setResultado(filtrados.slice(0, 3))
+            setBuscado(true)
             setCargando(false)
         }, 800)
     }
@@ -150,9 +153,12 @@ function Encuesta(){
                             </div>
                         ))}
                     </div>
-                    {resultado.length === 0 && (
-                        <p>No encontramos productos que coincidan con tus preferencias.</p>
-                    )}
+                </div>
+            )}
+
+            {buscado && !cargando && resultado.length === 0 && (
+                <div className="encuesta-resultado">
+                    <p>No encontramos productos que coincidan con tus preferencias.</p>
                 </div>
             )}
         </div>

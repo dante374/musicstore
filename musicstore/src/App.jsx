@@ -9,6 +9,7 @@ import Registro from './paginas/Registro'
 import Contacto from './paginas/Contacto'
 import Encuesta from './paginas/Encuesta'
 import Checkout from './paginas/Checkout'
+import NoEncontrada from './paginas/NoEncontrada'
 
 function App(){
   return(
@@ -24,6 +25,7 @@ function App(){
       <Route path='/registro' element={<Registro/>}/>
       <Route path='/contacto' element={<Contacto/>}/>
       <Route path='/encuesta' element={<Encuesta/>}/>
+      <Route path='*' element={<NoEncontrada/>}/>
     </Routes>
   </main>
   <Footer/>

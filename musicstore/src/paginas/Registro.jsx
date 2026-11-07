@@ -35,7 +35,7 @@ function Registro(){
         try {
             // Verificar si el email ya está registrado
             const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]')
-            const existe = usuarios.find(u => u.email === email)
+            const existe = usuarios.find(u => u.email.toLowerCase() === email.toLowerCase())
             if(existe){
                 setErrorServidor('El email ya está registrado')
                 return
